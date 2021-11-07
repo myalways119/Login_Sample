@@ -19,11 +19,10 @@ import uz.uchqun.login_sample.ui.auth.viewmodel.AuthViewModel
 import uz.uchqun.login_sample.ui.base.BaseFragment
 import uz.uchqun.login_sample.ui.home.HomeActivity
 
-
-class LoginFragment : BaseFragment<AuthViewModel,FragmentLoginBinding,AuthRepository>() {
-
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepository>()
+{
+    override fun onActivityCreated(savedInstanceState: Bundle?)
+    {
         super.onActivityCreated(savedInstanceState)
 
         mBinding.loginProgressBar.visible(false)
