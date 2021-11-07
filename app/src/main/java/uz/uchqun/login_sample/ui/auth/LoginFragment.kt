@@ -29,7 +29,6 @@ class LoginFragment : BaseFragment<AuthViewModel,FragmentLoginBinding,AuthReposi
         mBinding.loginProgressBar.visible(false)
         mBinding.loginBtn.enable(false)
 
-
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
             mBinding.loginProgressBar.visible(it is Resource.Loading)
             when(it){
@@ -38,8 +37,6 @@ class LoginFragment : BaseFragment<AuthViewModel,FragmentLoginBinding,AuthReposi
                         viewModel.savedAuthToken(it.value.user.access_token)
                         requireActivity().startNewActivity(HomeActivity::class.java)
                     }
-
-
                 }
                 is Resource.Failure->handleApiError(it){
                     login()
@@ -57,13 +54,11 @@ class LoginFragment : BaseFragment<AuthViewModel,FragmentLoginBinding,AuthReposi
         }
     }
 
-    private  fun login(){
+    private fun login(){
         val email = mBinding.lgEditEmail.text.toString().trim()
         val password = mBinding.lgEditPassword.text.toString().trim()
         viewModel.login(email,password)
     }
-
-
 
     override fun getViewModel(): Class<AuthViewModel>  = AuthViewModel::class.java
 

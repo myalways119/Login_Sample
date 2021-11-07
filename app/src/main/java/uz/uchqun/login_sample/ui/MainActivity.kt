@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity()
 
         //Application Context 어플 전체 공유를 위한....그런 것들.
         val userPreferences = UserPreferences(this)
+        //AuthToken will be changed after later...(current be used as androrid id)
         userPreferences.authToken.asLiveData().observe(this, Observer
         {
             val activity = if (it == null) AuthActivity::class.java else HomeActivity::class.java

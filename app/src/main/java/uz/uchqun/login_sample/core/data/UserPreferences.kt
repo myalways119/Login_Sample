@@ -15,11 +15,25 @@ class UserPreferences(context: Context)
     init {dataStore = applicationContext.createDataStore(name = "my_data_store")}
 
     val authToken: kotlinx.coroutines.flow.Flow<String?>
-        get() = dataStore.data.map { preferences -> preferences[KEY_AUTH]}
+        get() = dataStore.data.map { preferences -> preferences[KEY_ANDROID_ID]}
+        //get() = dataStore.data.map { preferences -> preferences[KEY_AUTH]}
+
+    val phoneNo: kotlinx.coroutines.flow.Flow<String?>
+        get() = dataStore.data.map { preferences -> preferences[KEY_PHONE_NO]}
+
+    val androidId: kotlinx.coroutines.flow.Flow<String?>
+        get() = dataStore.data.map { preferences -> preferences[KEY_ANDROID_ID]}
 
     suspend fun savedAuthToken(authToken: String)
     {
-        dataStore.edit { preferences -> preferences[KEY_AUTH] = authToken}
+        //dataStore.edit { preferences -> preferences[KEY_AUTH] = authToken}
+        dataStore.edit { preferences -> preferences[KEY_ANDROID_ID] = authToken}
+    }
+
+    suspend fun savedPhoneInfo(phoneNo: String, androidId: String)
+    {
+        dataStore.edit { preferences -> preferences[KEY_PHONE_NO] = phoneNo}
+        dataStore.edit { preferences -> preferences[KEY_ANDROID_ID] = androidId}
     }
 
     suspend fun clear()
@@ -30,5 +44,7 @@ class UserPreferences(context: Context)
     companion object
     {
         private val KEY_AUTH = stringPreferencesKey("key_auth")
+        private val KEY_PHONE_NO = stringPreferencesKey("PHONE_NO")
+        private val KEY_ANDROID_ID = stringPreferencesKey("ANDROID_ID")
     }
 }
