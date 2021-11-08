@@ -5,7 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-s
+
 class RemoteDataSource
 {
     companion object {private const val BASE_URL = "https://freemon1.cafe24.com/myfirstdream/php/"}

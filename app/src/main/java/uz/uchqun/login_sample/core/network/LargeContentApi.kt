@@ -12,6 +12,6 @@ interface LargeContentApi
     @POST("LargeContentApi.php")
     suspend fun SearchContent(
         @Field("action") action: String?,
-        @Field("type") type: String,
-    ): Call<LargeContentResponse>?
+        @Field("type") type: String
+    ): LargeContentResponse
 }
