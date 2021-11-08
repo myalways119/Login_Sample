@@ -1,11 +1,11 @@
 package uz.uchqun.login_sample.core.network
 
+import androidx.viewbinding.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import uz.uchqun.login_sample.BuildConfig
-
+s
 class RemoteDataSource
 {
     companion object {private const val BASE_URL = "https://freemon1.cafe24.com/myfirstdream/php/"}

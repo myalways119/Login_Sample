@@ -23,4 +23,11 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/PermissionFragment"
+        android:name="uz.uchqun.login_sample.ui.auth.PermissionFragment"
+        android:label="fragment_permission"
+        tools:layout="@layout/fragment_permission" >
+    </fragment>
 </navigation>
