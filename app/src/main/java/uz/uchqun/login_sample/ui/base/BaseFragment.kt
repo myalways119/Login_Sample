@@ -20,14 +20,12 @@ import uz.uchqun.login_sample.ui.auth.AuthActivity
 import uz.uchqun.login_sample.ui.base.viewModel.BaseViewModel
 import uz.uchqun.login_sample.ui.base.viewModel.ViewModelFactory
 
-abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseRepository> : Fragment() {
-
-
+abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseRepository> : Fragment()
+{
     protected lateinit var userPreferences: UserPreferences
     protected lateinit var mBinding: B
     protected lateinit var viewModel: VM
     protected val remoteDataSource = RemoteDataSource()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,10 +51,6 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseReposit
         requireActivity().startNewActivity(AuthActivity::class.java)
     }
     abstract fun getViewModel(): Class<VM>
-
     abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): B
-
     abstract fun getFragmentRepository(): R
-
-
 }

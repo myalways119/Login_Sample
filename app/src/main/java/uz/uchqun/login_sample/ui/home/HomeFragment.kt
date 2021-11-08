@@ -16,10 +16,8 @@ import uz.uchqun.login_sample.databinding.FragmentHomeBinding
 import uz.uchqun.login_sample.ui.base.BaseFragment
 import uz.uchqun.login_sample.ui.home.viewModel.HomeViewModel
 
-
-class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserRepository>() {
-
-
+class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserRepository>()
+{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.map
 
 class UserPreferences(context: Context)
 {
+    //private val applicationContext = context.applicationContext
     private val applicationContext = context.applicationContext
     private val dataStore: DataStore<androidx.datastore.preferences.core.Preferences>
 
@@ -16,7 +17,6 @@ class UserPreferences(context: Context)
 
     val authToken: kotlinx.coroutines.flow.Flow<String?>
         get() = dataStore.data.map { preferences -> preferences[KEY_ANDROID_ID]}
-        //get() = dataStore.data.map { preferences -> preferences[KEY_AUTH]}
 
     val phoneNo: kotlinx.coroutines.flow.Flow<String?>
         get() = dataStore.data.map { preferences -> preferences[KEY_PHONE_NO]}
@@ -26,7 +26,6 @@ class UserPreferences(context: Context)
 
     suspend fun savedAuthToken(authToken: String)
     {
-        //dataStore.edit { preferences -> preferences[KEY_AUTH] = authToken}
         dataStore.edit { preferences -> preferences[KEY_ANDROID_ID] = authToken}
     }
 
@@ -43,7 +42,7 @@ class UserPreferences(context: Context)
 
     companion object
     {
-        private val KEY_AUTH = stringPreferencesKey("key_auth")
+        private val KEY_AUTH = stringPreferencesKey("KEY_AUTH")
         private val KEY_PHONE_NO = stringPreferencesKey("PHONE_NO")
         private val KEY_ANDROID_ID = stringPreferencesKey("ANDROID_ID")
     }
