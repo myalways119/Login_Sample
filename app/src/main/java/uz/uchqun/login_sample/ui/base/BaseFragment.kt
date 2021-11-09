@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
@@ -15,7 +14,7 @@ import uz.uchqun.login_sample.core.data.UserPreferences
 import uz.uchqun.login_sample.core.network.RemoteDataSource
 import uz.uchqun.login_sample.core.network.UserApi
 import uz.uchqun.login_sample.core.repository.BaseRepository
-import uz.uchqun.login_sample.core.util.startNewActivity
+import uz.uchqun.login_sample.core.util.Utils.startNewActivity
 import uz.uchqun.login_sample.ui.auth.AuthActivity
 import uz.uchqun.login_sample.ui.base.viewModel.BaseViewModel
 import uz.uchqun.login_sample.ui.base.viewModel.ViewModelFactory
@@ -31,7 +30,8 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseReposit
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View?
+    {
         userPreferences = UserPreferences(requireContext())
         mBinding = getFragmentBinding(inflater, container)
         val factory = ViewModelFactory(getFragmentRepository())

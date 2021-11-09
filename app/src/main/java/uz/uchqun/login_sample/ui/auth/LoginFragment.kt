@@ -23,8 +23,10 @@ import uz.uchqun.login_sample.ui.auth.viewmodel.AuthViewModel
 import uz.uchqun.login_sample.ui.base.BaseFragment
 import uz.uchqun.login_sample.ui.home.HomeActivity
 import android.telephony.TelephonyManager
-import java.lang.NullPointerException
-
+import uz.uchqun.login_sample.core.util.Utils.enable
+import uz.uchqun.login_sample.core.util.Utils.handleApiError
+import uz.uchqun.login_sample.core.util.Utils.startNewActivity
+import uz.uchqun.login_sample.core.util.Utils.visible
 
 class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepository>()
 {

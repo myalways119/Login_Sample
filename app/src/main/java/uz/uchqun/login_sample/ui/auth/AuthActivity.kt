@@ -11,9 +11,4 @@ class AuthActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
     }
-
-    private fun SetIntializeNavi()
-    {
-        findNavController().navigate(R.id.flow_step_one_dest)
-    }
 }

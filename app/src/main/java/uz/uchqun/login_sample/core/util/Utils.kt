@@ -1,27 +1,77 @@
 package uz.uchqun.login_sample.core.util
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.provider.Settings
-import android.telephony.PhoneNumberUtils
 import android.telephony.TelephonyManager
 import android.view.View
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import uz.uchqun.login_sample.core.model.UserResponse
+import uz.uchqun.login_sample.core.network.RemoteDataSource
+import uz.uchqun.login_sample.core.network.UserApi
+import uz.uchqun.login_sample.core.util.Utils.startNewActivity
+import uz.uchqun.login_sample.ui.auth.AuthActivity
 import uz.uchqun.login_sample.ui.auth.LoginFragment
 import uz.uchqun.login_sample.ui.base.BaseFragment
-import java.util.*
 
 object Utils
 {
+    private val remoteDataSource = RemoteDataSource()
+
+    fun GetUserInfo(phoneNo:String):UserResponse?
+    {
+        var returnValue: UserResponse? = null
+
+            logout() =lifecycleScope.launch{
+            val authToken = userPreferences.authToken.first()
+            val api = remoteDataSource.buildApi(UserApi::class.java,authToken)
+            viewModel.logout(api)
+            userPreferences.clear()
+            requireActivity().startNewActivity(AuthActivity::class.java)
+        }
+
+        return returnValue
+    }
+
+    fun ExitApp(actovotu:Activity)
+    {
+        actovotu.finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다. (API  16미만은 ActivityCompat.finishAffinity())
+        System.runFinalization() //현재 작업중인 쓰레드가 다 종료되면, 종료 시키라는 명령어이다.
+        System.exit(0)
+    }
+
+    fun CheckNetworkState(context:Context): Boolean
+    {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            val nw = connectivityManager.activeNetwork ?: return false
+            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+            return when {
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        }
+        else
+        {
+            val nwInfo = connectivityManager.activeNetworkInfo ?: return false
+            return nwInfo.isConnected
+        }
+    }
+
     @SuppressLint("MissingPermission", "HardwareIds")
     fun GetDevicePhoneNo(context: Context) : String {
         val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager

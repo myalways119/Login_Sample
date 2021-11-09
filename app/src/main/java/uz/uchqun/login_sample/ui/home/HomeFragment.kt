@@ -11,14 +11,15 @@ import uz.uchqun.login_sample.core.model.User
 import uz.uchqun.login_sample.core.network.UserApi
 import uz.uchqun.login_sample.core.repository.UserRepository
 import uz.uchqun.login_sample.core.util.Resource
-import uz.uchqun.login_sample.core.util.visible
+import uz.uchqun.login_sample.core.util.Utils.visible
 import uz.uchqun.login_sample.databinding.FragmentHomeBinding
 import uz.uchqun.login_sample.ui.base.BaseFragment
 import uz.uchqun.login_sample.ui.home.viewModel.HomeViewModel
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserRepository>()
 {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
         super.onViewCreated(view, savedInstanceState)
 
         mBinding.homeProgressBar.visible(false)
@@ -37,7 +38,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
                 }
             }
         })
-
 
         mBinding.homeLogOut.setOnClickListener {
             logout()

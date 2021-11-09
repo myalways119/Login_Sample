@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.map
 
 class UserPreferences(context: Context)
 {
-    //private val applicationContext = context.applicationContext
     private val applicationContext = context.applicationContext
     private val dataStore: DataStore<androidx.datastore.preferences.core.Preferences>
 
