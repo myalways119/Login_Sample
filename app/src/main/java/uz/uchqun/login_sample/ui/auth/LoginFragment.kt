@@ -1,6 +1,9 @@
 package uz.uchqun.login_sample.ui.auth
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.provider.Settings
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +22,9 @@ import uz.uchqun.login_sample.databinding.FragmentLoginBinding
 import uz.uchqun.login_sample.ui.auth.viewmodel.AuthViewModel
 import uz.uchqun.login_sample.ui.base.BaseFragment
 import uz.uchqun.login_sample.ui.home.HomeActivity
+import android.telephony.TelephonyManager
+import java.lang.NullPointerException
+
 
 class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepository>()
 {
@@ -60,6 +66,29 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         viewModel.login(email,password)
     }
 
+    @SuppressLint("MissingPermission", "HardwareIds")
+    fun GetDevicePhoneNo(context: Context) : String {
+        val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        return telephonyManager.line1Number
+    }
+
+    @SuppressLint("HardwareIds")
+    fun GetAndroidID(context: Context): String {
+        return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+    }
+
+    private fun DoSearchLargeContent(){
+        //val email = mBinding.lgEditEmail.text.toString().trim()
+        //val password = mBinding.lgEditPassword.text.toString().trim()
+        val type:String = Constant.LargeContentType.AGREE_CONTENT
+        viewModel.SearchLargeContent( Constant.ApiAction.SELECT_LARGE_CONTENT, type )
+    }
+
+    private fun DoSearchUser(){
+        val phoneNo:String = GetDevicePhoneNo(requireContext())
+        viewModel.SearchUser( Constant.ApiAction.SELECT_USER, phoneNo)
+    }
+
     override fun getViewModel(): Class<AuthViewModel>  = AuthViewModel::class.java
 
     override fun getFragmentBinding(
@@ -68,5 +97,4 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
     ): FragmentLoginBinding  = FragmentLoginBinding.inflate(inflater,container,false)
 
     override fun getFragmentRepository() = AuthRepository(remoteDataSource.buildApi(AuthApi::class.java), userPreferences)
-
 }
