@@ -17,23 +17,18 @@ class RemoteDataSource
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(OkHttpClient.Builder()
-                .addInterceptor { chain ->
-                    chain.proceed(chain.request().newBuilder().also {
-                        it.addHeader("Authorization", "Bearer $authToken")
-                    }.build())
-                }
-                .also { client ->
-                    if (BuildConfig.DEBUG) {
-                        val logging = HttpLoggingInterceptor()
-                        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
-                        client.addInterceptor(logging)
-                    }
-                }.build()
-            )
+                    .addInterceptor { chain -> chain.proceed(chain.request().newBuilder().also {
+                                        it.addHeader("Authorization", "Bearer $authToken")}.build())
+                                    }
+                    .also { client -> if (BuildConfig.DEBUG) {
+                                val logging = HttpLoggingInterceptor()
+                                logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+                                client.addInterceptor(logging)
+                            }
+                        }.build()
+                    )
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(api)
     }
-
-
 }

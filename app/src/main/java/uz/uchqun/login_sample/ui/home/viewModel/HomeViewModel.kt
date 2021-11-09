@@ -2,7 +2,6 @@ package uz.uchqun.login_sample.ui.home.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import uz.uchqun.login_sample.core.model.LoginResponse

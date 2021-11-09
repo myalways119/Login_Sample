@@ -11,14 +11,14 @@ interface AuthApi
     @FormUrlEncoded
     @POST("AuthApi.php")
     suspend fun SelectUser(
-        @Field("action") action: String?,
+        @Field("action") action: String,
         @Field("phone_no") phoneNo: String
     ): UserResponse
 
     @FormUrlEncoded
     @POST("AuthApi.php")
     suspend fun SelectContent(
-        @Field("action") action: String?,
+        @Field("action") action: String,
         @Field("type") type: String
     ): LargeContentResponse
 }

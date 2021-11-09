@@ -3,13 +3,9 @@ package uz.uchqun.login_sample.ui
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
 import uz.uchqun.login_sample.R
 import uz.uchqun.login_sample.core.data.UserPreferences
-import uz.uchqun.login_sample.core.model.UserResponse
-import uz.uchqun.login_sample.core.network.AuthApi
-import uz.uchqun.login_sample.core.repository.AuthRepository
+import uz.uchqun.login_sample.core.repository.CommonRepository
 import uz.uchqun.login_sample.core.util.Utils.CheckNetworkState
 import uz.uchqun.login_sample.core.util.Utils.CheckPermissions
 import uz.uchqun.login_sample.core.util.Utils.ExitApp
@@ -55,5 +51,10 @@ class MainActivity : AppCompatActivity()
         {
             startNewActivity(AuthActivity::class.java) //login Activity
         }
+    }
+
+    fun GetUserInfo(phoneNo:String)
+    {
+        CommonRepository
     }
 }

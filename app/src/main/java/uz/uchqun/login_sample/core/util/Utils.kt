@@ -13,37 +13,12 @@ import android.telephony.TelephonyManager
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
-import uz.uchqun.login_sample.core.model.UserResponse
-import uz.uchqun.login_sample.core.network.RemoteDataSource
-import uz.uchqun.login_sample.core.network.UserApi
-import uz.uchqun.login_sample.core.util.Utils.startNewActivity
-import uz.uchqun.login_sample.ui.auth.AuthActivity
 import uz.uchqun.login_sample.ui.auth.LoginFragment
 import uz.uchqun.login_sample.ui.base.BaseFragment
 
 object Utils
 {
-    private val remoteDataSource = RemoteDataSource()
-
-    fun GetUserInfo(phoneNo:String):UserResponse?
-    {
-        var returnValue: UserResponse? = null
-
-            logout() =lifecycleScope.launch{
-            val authToken = userPreferences.authToken.first()
-            val api = remoteDataSource.buildApi(UserApi::class.java,authToken)
-            viewModel.logout(api)
-            userPreferences.clear()
-            requireActivity().startNewActivity(AuthActivity::class.java)
-        }
-
-        return returnValue
-    }
-
     fun ExitApp(actovotu:Activity)
     {
         actovotu.finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다. (API  16미만은 ActivityCompat.finishAffinity())

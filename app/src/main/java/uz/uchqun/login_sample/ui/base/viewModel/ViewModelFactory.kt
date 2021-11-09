@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import uz.uchqun.login_sample.core.repository.AuthRepository
 import uz.uchqun.login_sample.core.repository.BaseRepository
+import uz.uchqun.login_sample.core.repository.CommonRepository
 import uz.uchqun.login_sample.core.repository.UserRepository
 import uz.uchqun.login_sample.ui.auth.viewmodel.AuthViewModel
 import uz.uchqun.login_sample.ui.home.viewModel.HomeViewModel
