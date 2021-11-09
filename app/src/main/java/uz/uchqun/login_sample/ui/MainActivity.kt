@@ -3,6 +3,9 @@ package uz.uchqun.login_sample.ui
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 import uz.uchqun.login_sample.R
 import uz.uchqun.login_sample.core.data.UserPreferences
 import uz.uchqun.login_sample.core.repository.CommonRepository
@@ -55,6 +58,11 @@ class MainActivity : AppCompatActivity()
 
     fun GetUserInfo(phoneNo:String)
     {
-        CommonRepository
+        var commonRpty: CommonRepository = CommonRepository()
+
+        CoroutineScope(Main).launch {
+            commonRpty.SearchUserInfo(phoneNo)
+        }
+
     }
 }
